@@ -4,8 +4,9 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication(scanBasePackages = "com.example")
+@SpringBootApplication(scanBasePackages = "com.example.demo")
 @MapperScan("com.example.demo.mapper")
 @ServletComponentScan("com.example.demo.service")
 public class DemoApplication {

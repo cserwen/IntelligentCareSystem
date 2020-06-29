@@ -5,3 +5,4 @@
 - mybatis
 - Lombok
 - mysql
+- redis

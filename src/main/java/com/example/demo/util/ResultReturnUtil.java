@@ -18,4 +18,8 @@ public class ResultReturnUtil {
     public static ResultReturn fail(String msg){
         return new ResultReturn(-1,msg);
     }
+
+    public static ResultReturn fail(int code,String msg){
+        return new ResultReturn(code,msg);
+    }
 }

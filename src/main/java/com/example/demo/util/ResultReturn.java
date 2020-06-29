@@ -2,6 +2,7 @@ package com.example.demo.util;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @ClassName ResultReturn
@@ -12,6 +13,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@ToString
 public class ResultReturn {
     private int code;
     private String msg;
