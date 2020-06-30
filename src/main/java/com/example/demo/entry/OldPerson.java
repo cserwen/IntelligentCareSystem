@@ -32,11 +32,11 @@ public class OldPerson {
     private String profilePhotoDir;
     private String roomNumber;
     private String firstGuardianName;
-    private String firstGuardianRelationship;
+    private String firstRelationship;
     private String firstGuardianPhone;
     private String firstGuardianWechat;
     private String secondGuardianName;
-    private String secondGuardianRelationship;
+    private String secondRelationship;
     private String secondGuardianPhone;
     private String secondGuardianWechat;
 
@@ -47,5 +47,5 @@ public class OldPerson {
     private int createBy;
     private Date updateTime;
     private int updateBy;
-    private char remove; //删除标志
+    private String remove; //删除标志
 }

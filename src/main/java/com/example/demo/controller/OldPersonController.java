@@ -29,4 +29,9 @@ public class OldPersonController {
     public ResultReturn add(@RequestBody OldPerson oldPerson){
         return oldPersonService.add(oldPerson);
     }
+
+    @RequestMapping("/update")
+    public ResultReturn update(@RequestBody OldPerson oldPerson){
+        return oldPersonService.update(oldPerson);
+    }
 }

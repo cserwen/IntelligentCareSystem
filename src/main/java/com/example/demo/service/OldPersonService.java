@@ -35,4 +35,16 @@ public class OldPersonService {
 
         return ResultReturnUtil.success("添加成功");
     }
+
+    public ResultReturn update(OldPerson oldPerson){
+        if (oldPerson.getUsername()==null||oldPerson.getUsername().equals(""))
+            return ResultReturnUtil.fail("名字不能为空");
+
+        OldPerson temp = oldPersonMapper.selectByUserName(oldPerson.getUsername());
+        if (temp==null){
+            return ResultReturnUtil.fail("该位老人信息不存在");
+        }
+        oldPersonMapper.update(oldPerson);
+        return ResultReturnUtil.success("修改成功");
+    }
 }

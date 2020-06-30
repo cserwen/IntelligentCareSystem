@@ -1,10 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entry.OldPerson;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 /**
  * @ClassName OldPersonMapper
@@ -23,9 +20,19 @@ public interface OldPersonMapper {
             "firstguardian_wechat, secondguardian_name, secondguardian_relationship, secondguardian_phone," +
             "secondguardian_wechat, health_state, DESCRIPTION, ISACTIVE, CREATED, CREATEBY, UPDATED, UPDATEBY, REMOVE) " +
             "values(1,1,#{username},#{gender},#{phone},#{idCard},#{birthday}, #{checkInDate}, #{checkOutDate}, #{imgSetDir}," +
-            " #{profilePhotoDir},#{roomNumber}, #{firstGuardianName}, #{firstGuardianRelationship}, #{firstGuardianPhone}," +
-            "#{firstGuardianWechat}, #{secondGuardianName}, #{secondGuardianRelationship}, #{secondGuardianPhone}," +
+            " #{profilePhotoDir},#{roomNumber}, #{firstGuardianName}, #{firstRelationship}, #{firstGuardianPhone}," +
+            "#{firstGuardianWechat}, #{secondGuardianName}, #{secondRelationship}, #{secondGuardianPhone}," +
             "#{secondGuardianWechat}, #{healthState}, #{description}, #{isActive},#{createTime}, #{createBy}, #{updateTime}," +
             " #{updateBy},#{remove})")
     void add(OldPerson oldPerson);
+
+    @Update("update oldperson_info set username=#{username}, gender=#{gender}, phone=#{phone}, id_card=#{idCard}," +
+            "birthday=#{birthday}, checkin_date=#{checkInDate}, checkout_date=#{checkOutDate}, imgset_dir=#{imgSetDir}, " +
+            "profile_photo=#{profilePhotoDir}, room_number=#{roomNumber}, firstguardian_name=#{firstGuardianName},"+
+            "firstguardian_relationship=#{firstRelationship}, firstguardian_phone=#{firstGuardianPhone}," +
+            "firstguardian_wechat=#{firstGuardianWechat}, secondguardian_name=#{secondGuardianName},secondguardian_relationship=" +
+            "#{secondRelationship}, secondguardian_phone=#{secondGuardianPhone}, secondguardian_wechat=" +
+            "#{secondGuardianWechat}, health_state=#{healthState}, DESCRIPTION=#{description}, ISACTIVE=#{isActive}," +
+            "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove}")
+    void update(OldPerson oldPerson);
 }
