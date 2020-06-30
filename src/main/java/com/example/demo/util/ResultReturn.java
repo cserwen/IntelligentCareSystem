@@ -6,7 +6,7 @@ import lombok.ToString;
 
 /**
  * @ClassName ResultReturn
- * @Description TODO
+ * @Description 返回结果的json数据实体类
  * @Created by dengzhiwen
  * @Date 2020/6/29 11:49
  **/

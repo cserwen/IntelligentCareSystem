@@ -4,7 +4,7 @@ import java.util.UUID;
 
 /**
  * @ClassName TokenUtils
- * @Description TODO
+ * @Description token生成工具类
  * @Created by dengzhiwen
  * @Date 2020/6/29 18:40
  **/

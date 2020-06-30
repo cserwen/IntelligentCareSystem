@@ -7,7 +7,7 @@ import lombok.ToString;
 
 /**
  * @ClassName LoginBo
- * @Description TODO
+ * @Description 用户登录的业务模型
  * @Created by dengzhiwen
  * @Date 2020/6/29 11:41
  **/

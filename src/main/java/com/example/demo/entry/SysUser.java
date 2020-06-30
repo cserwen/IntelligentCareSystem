@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @ClassName SysUser
- * @Description TODO
+ * @Description 系统管理员额实体类
  * @Created by dengzhiwen
  * @Date 2020/6/29 11:31
  **/

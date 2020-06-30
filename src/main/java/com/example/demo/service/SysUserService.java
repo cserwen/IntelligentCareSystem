@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 
 /**
  * @ClassName SysUserService
- * @Description TODO
+ * @Description 系统用户的服务
  * @Created by dengzhiwen
  * @Date 2020/6/29 12:22
  **/

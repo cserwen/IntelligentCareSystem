@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName RedisService
- * @Description TODO
+ * @Description redis操作服务
  * @Created by dengzhiwen
  * @Date 2020/6/29 18:34
  **/

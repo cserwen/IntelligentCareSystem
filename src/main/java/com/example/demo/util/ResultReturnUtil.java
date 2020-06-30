@@ -2,7 +2,7 @@ package com.example.demo.util;
 
 /**
  * @ClassName ResultReturnUtil
- * @Description TODO
+ * @Description 返回结果工具类
  * @Created by dengzhiwen
  * @Date 2020/6/29 11:48
  **/

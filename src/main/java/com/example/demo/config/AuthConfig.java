@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 
 /**
  * @ClassName AuthConfig
- * @Description TODO
+ * @Description 登录拦截器
  * @Created by dengzhiwen
  * @Date 2020/6/29 19:09
  **/

@@ -16,7 +16,7 @@ import java.util.Objects;
 
 /**
  * @ClassName AuthInterceptor
- * @Description TODO
+ * @Description 身份认证
  * @Created by dengzhiwen
  * @Date 2020/6/29 19:06
  **/
