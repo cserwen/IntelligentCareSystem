@@ -41,7 +41,8 @@ public interface OldPersonMapper {
             "firstguardian_wechat=#{firstGuardianWechat}, secondguardian_name=#{secondGuardianName},secondguardian_relationship=" +
             "#{secondRelationship}, secondguardian_phone=#{secondGuardianPhone}, secondguardian_wechat=" +
             "#{secondGuardianWechat}, health_state=#{healthState}, DESCRIPTION=#{description}, ISACTIVE=#{isActive}," +
-            "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove}")
+            "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove} " +
+            "where username=#{username}")
     void update(OldPerson oldPerson);
 
     @Delete("delete from oldperson_info where ID=#{id}")
