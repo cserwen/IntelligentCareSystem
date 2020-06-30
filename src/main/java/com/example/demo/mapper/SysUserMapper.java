@@ -1,5 +1,6 @@
 package com.example.demo.mapper;
 
+import com.example.demo.bo.EditSysUserInfoBo;
 import com.example.demo.entry.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -20,4 +21,6 @@ public interface SysUserMapper {
     @Update("update sys_user set Password=#{password} where UserName = #{username}")
     void changePassword(String password, String username);
 
+    @Update("update sys_user set REAL_NAME=#{realName}, EMAIL=#{email}, CREATED=#{createTime} where UserName = #{userName}")
+    void updateSysUserInfo(EditSysUserInfoBo sysUserInfoBo);
 }

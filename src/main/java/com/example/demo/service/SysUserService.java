@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.bo.ChangePasswordBo;
+import com.example.demo.bo.EditSysUserInfoBo;
 import com.example.demo.bo.LoginBo;
 import com.example.demo.entry.SysUser;
 import com.example.demo.mapper.SysUserMapper;
@@ -56,6 +57,17 @@ public class SysUserService{
         }
         else
             return ResultReturnUtil.fail("password error!");
+    }
+
+    public ResultReturn editInfo(EditSysUserInfoBo sysUserInfoBo){
+        String token = sysUserInfoBo.getToken();
+        String username = (String)redisService.get(token);
+        SysUser user = sysUserMapper.selectByUsername(username);
+        if (user == null)
+            return ResultReturnUtil.fail("no such user!");
+        sysUserInfoBo.setUserName(username);
+        sysUserMapper.updateSysUserInfo(sysUserInfoBo);
+        return ResultReturnUtil.success("修改成功");
     }
 
 

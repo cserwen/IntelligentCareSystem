@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 
 import com.example.demo.bo.ChangePasswordBo;
+import com.example.demo.bo.EditSysUserInfoBo;
 import com.example.demo.bo.LoginBo;
 import com.example.demo.service.SysUserService;
 import com.example.demo.util.ResultReturn;
@@ -30,4 +31,12 @@ public class SysUserController {
         System.out.println(changePasswordBo.toString());
         return sysUserService.changePassword(changePasswordBo);
     }
+
+    @RequestMapping("/editSysUserInfo")
+    public ResultReturn edit(@RequestBody EditSysUserInfoBo sysUserInfoBo, @RequestHeader("token") String token){
+        sysUserInfoBo.setToken(token);
+        return sysUserService.editInfo(sysUserInfoBo);
+    }
+
+
 }
