@@ -1,20 +1,19 @@
 package com.example.demo.controller;
 
 
+import com.example.demo.bo.ChangePasswordBo;
 import com.example.demo.bo.LoginBo;
 import com.example.demo.service.SysUserService;
 import com.example.demo.util.ResultReturn;
-import com.example.demo.util.ResultReturnUtil;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @CrossOrigin(allowCredentials="true",maxAge = 3600)
-public class LoginController {
+@RequestMapping("/sysUser")
+public class SysUserController {
 
     @Resource
     private SysUserService sysUserService;
@@ -25,9 +24,10 @@ public class LoginController {
         return sysUserService.login(loginBo);
     }
 
-    @RequestMapping("/test")
-    public ResultReturn test(@RequestBody LoginBo loginBo){
-        System.out.println(loginBo.toString());
-        return ResultReturnUtil.success("hello world!");
+    @RequestMapping("/changePassword")
+    public ResultReturn test(@RequestBody ChangePasswordBo changePasswordBo, @RequestHeader("token") String token){
+        changePasswordBo.setToken(token);
+        System.out.println(changePasswordBo.toString());
+        return sysUserService.changePassword(changePasswordBo);
     }
 }

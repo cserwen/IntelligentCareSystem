@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.bo.ChangePasswordBo;
 import com.example.demo.bo.LoginBo;
 import com.example.demo.entry.SysUser;
 import com.example.demo.mapper.SysUserMapper;
@@ -32,10 +33,26 @@ public class SysUserService{
         if (user.getPassword().equals(loginBo.getPassword())){
             String token = TokenUtil.getToken();
 //            System.out.println(token + " " + loginBo.toString());
-            redisService.setString(token, loginBo.getUsername(),60L);
+            redisService.setString(token, loginBo.getUsername(),3600L);
             System.out.println(redisService.get(token));
             return ResultReturnUtil.success("login success!", token);
 
+        }
+        else
+            return ResultReturnUtil.fail("password error!");
+    }
+
+    public ResultReturn changePassword(ChangePasswordBo changePasswordBo){
+        String token = changePasswordBo.getToken();
+        String username = (String)redisService.get(token);
+        SysUser user = sysUserMapper.selectByUsername(username);
+        if (user == null)
+            return ResultReturnUtil.fail("no such user!");
+
+        if (user.getPassword().equals(changePasswordBo.getOldPassword())){
+            //修改密码
+            sysUserMapper.changePassword(changePasswordBo.getNewPassword(), username);
+            return ResultReturnUtil.success("change success");
         }
         else
             return ResultReturnUtil.fail("password error!");

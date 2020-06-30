@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import com.example.demo.entry.SysUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * @ClassName SysUserMapper
@@ -15,4 +16,8 @@ public interface SysUserMapper {
 
     @Select("select * from sys_user where UserName = #{username}")
     SysUser selectByUsername(String username);
+
+    @Update("update sys_user set Password=#{password} where UserName = #{username}")
+    void changePassword(String password, String username);
+
 }
