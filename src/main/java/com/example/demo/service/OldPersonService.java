@@ -7,6 +7,8 @@ import com.example.demo.util.ResultReturnUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @ClassName OldPersonService
@@ -57,6 +59,11 @@ public class OldPersonService {
 
         oldPersonMapper.delete(id);
         return ResultReturnUtil.success("删除成功");
+    }
 
+    public ResultReturn getAll(){
+
+        List<OldPerson> lists = oldPersonMapper.getAll();
+        return ResultReturnUtil.success("查询成功！",lists);
     }
 }

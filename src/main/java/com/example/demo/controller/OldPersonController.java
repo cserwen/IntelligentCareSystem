@@ -40,4 +40,9 @@ public class OldPersonController {
     public ResultReturn delete(@RequestBody DeleteByIdBo id){
         return oldPersonService.delete(id.getId());
     }
+
+    @RequestMapping("/getAll")
+    public ResultReturn getAll(){
+        return oldPersonService.getAll();
+    }
 }

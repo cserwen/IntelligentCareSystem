@@ -3,6 +3,8 @@ package com.example.demo.mapper;
 import com.example.demo.entry.OldPerson;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * @ClassName OldPersonMapper
  * @Description TODO
@@ -17,6 +19,9 @@ public interface OldPersonMapper {
 
     @Select("select * from oldperson_info where ID=#{id}")
     OldPerson selectByID(int id);
+
+    @Select("select * from oldperson_info")
+    List<OldPerson> getAll();
 
     @Insert("insert into oldperson_info(ORG_ID, CLIENT_ID, username, gender,phone,id_card,birthday,checkin_date, checkout_date, imgset_dir," +
             "profile_photo, room_number, firstguardian_name, firstguardian_relationship, firstguardian_phone," +
