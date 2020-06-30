@@ -15,6 +15,9 @@ public interface OldPersonMapper {
     @Select("select * from oldperson_info where username=#{username}")
     OldPerson selectByUserName(String username);
 
+    @Select("select * from oldperson_info where ID=#{id}")
+    OldPerson selectByID(int id);
+
     @Insert("insert into oldperson_info(ORG_ID, CLIENT_ID, username, gender,phone,id_card,birthday,checkin_date, checkout_date, imgset_dir," +
             "profile_photo, room_number, firstguardian_name, firstguardian_relationship, firstguardian_phone," +
             "firstguardian_wechat, secondguardian_name, secondguardian_relationship, secondguardian_phone," +
@@ -35,4 +38,7 @@ public interface OldPersonMapper {
             "#{secondGuardianWechat}, health_state=#{healthState}, DESCRIPTION=#{description}, ISACTIVE=#{isActive}," +
             "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove}")
     void update(OldPerson oldPerson);
+
+    @Delete("delete from oldperson_info where ID=#{id}")
+    void delete(int id);
 }

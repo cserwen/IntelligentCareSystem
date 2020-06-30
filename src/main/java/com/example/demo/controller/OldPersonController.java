@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.bo.DeleteByIdBo;
 import com.example.demo.entry.OldPerson;
 import com.example.demo.service.OldPersonService;
 import com.example.demo.util.ResultReturn;
@@ -33,5 +34,10 @@ public class OldPersonController {
     @RequestMapping("/update")
     public ResultReturn update(@RequestBody OldPerson oldPerson){
         return oldPersonService.update(oldPerson);
+    }
+
+    @RequestMapping("/delete")
+    public ResultReturn delete(@RequestBody DeleteByIdBo id){
+        return oldPersonService.delete(id.getId());
     }
 }

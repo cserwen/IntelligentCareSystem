@@ -47,4 +47,16 @@ public class OldPersonService {
         oldPersonMapper.update(oldPerson);
         return ResultReturnUtil.success("修改成功");
     }
+
+    public ResultReturn delete(int id){
+
+        OldPerson temp = oldPersonMapper.selectByID(id);
+        if (temp==null){
+            return ResultReturnUtil.fail("该位老人不存在");
+        }
+
+        oldPersonMapper.delete(id);
+        return ResultReturnUtil.success("删除成功");
+
+    }
 }
