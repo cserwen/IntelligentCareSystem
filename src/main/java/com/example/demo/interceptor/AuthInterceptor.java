@@ -30,8 +30,13 @@ public class AuthInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=utf-8");
+
+        //解决跨域请求，options方法直接返回true
+        if (request.getMethod().equals("OPTIONS"))
+            return true;
+
         String token = request.getHeader("token");
-        System.out.println(token);
+        System.out.println("token: "+ token);
         if (StringUtils.isEmpty(token)) {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/json; charset=utf-8");

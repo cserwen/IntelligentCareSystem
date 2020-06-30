@@ -19,7 +19,7 @@ import javax.annotation.Resource;
  * @Date 2020/6/30 12:11
  **/
 @RestController
-@CrossOrigin(allowCredentials="true",maxAge = 3600)
+//@CrossOrigin(allowCredentials="true",maxAge = 3600, origins = "*")
 @RequestMapping("/oldPerson")
 public class OldPersonController {
 

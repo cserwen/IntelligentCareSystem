@@ -10,9 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@CrossOrigin(allowCredentials="true",maxAge = 3600)
+//@CrossOrigin(allowCredentials="true",maxAge = 3600, origins = "*")
 @RequestMapping("/sysUser")
 public class SysUserController {
 
@@ -28,7 +29,7 @@ public class SysUserController {
     @RequestMapping("/changePassword")
     public ResultReturn test(@RequestBody ChangePasswordBo changePasswordBo, @RequestHeader("token") String token){
         changePasswordBo.setToken(token);
-        System.out.println(changePasswordBo.toString());
+        System.out.println("修改密码" + changePasswordBo.toString());
         return sysUserService.changePassword(changePasswordBo);
     }
 
