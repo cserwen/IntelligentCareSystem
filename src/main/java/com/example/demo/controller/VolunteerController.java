@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.bo.DeleteByIdBo;
 import com.example.demo.entry.Volunteer;
 import com.example.demo.service.VolunteerService;
 import com.example.demo.util.ResultReturn;
@@ -29,5 +30,10 @@ public class VolunteerController {
     @RequestMapping("/update")
     public ResultReturn update(@RequestBody Volunteer volunteer){
         return volunteerService.update(volunteer);
+    }
+
+    @RequestMapping("/delete")
+    public ResultReturn delete(@RequestBody DeleteByIdBo id){
+        return volunteerService.delete(id.getId());
     }
 }

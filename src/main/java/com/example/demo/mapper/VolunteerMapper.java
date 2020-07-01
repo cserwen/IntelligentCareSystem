@@ -2,10 +2,9 @@ package com.example.demo.mapper;
 
 import com.example.demo.entry.Employee;
 import com.example.demo.entry.Volunteer;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
+
+import java.util.List;
 
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
@@ -33,4 +32,10 @@ public interface VolunteerMapper {
             "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove} " +
             "where name=#{name}")
     void update(Volunteer volunteer);
+
+    @Delete("delete from volunteer_info where ID=#{id}")
+    void delete(int id);
+
+    @Select("select * from volunteer_info")
+    List<Volunteer> getAll();
 }

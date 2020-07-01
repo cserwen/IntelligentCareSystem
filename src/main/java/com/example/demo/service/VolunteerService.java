@@ -44,4 +44,16 @@ public class VolunteerService {
         volunteerMapper.update(volunteer);
         return ResultReturnUtil.success("修改成功");
     }
+
+    public ResultReturn delete(int id){
+
+        Volunteer volunteer = volunteerMapper.selectById(id);
+        if (volunteer == null){
+            return ResultReturnUtil.fail("该义工信息不存在");
+        }
+
+        volunteerMapper.delete(id);
+
+        return ResultReturnUtil.success("删除成功");
+    }
 }

@@ -34,7 +34,7 @@ public interface EmployeeMapper {
             "where username=#{username}")
     void update(Employee employee);
 
-    @Delete("delete from employee_info where ID=#{id}")
+    @Delete("delete from employee_info where id=#{id}")
     void delete(int id);
 
     @Select("select * from employee_info")
