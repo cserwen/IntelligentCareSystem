@@ -2,10 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.entry.Employee;
 import com.example.demo.entry.OldPerson;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
@@ -18,6 +15,8 @@ public interface EmployeeMapper {
     @Select("select * from employee_info where username=#{username}")
     Employee selectByUserName(String username);
 
+    @Select("select * from employee_info where id=#{id}")
+    Employee selectById(int id);
 
     @Insert("insert into employee_info(ORG_ID, CLIENT_ID, username, gender,phone,id_card,birthday,hire_date, resign_date, imgset_dir," +
             "profile_photo, DESCRIPTION, ISACTIVE, CREATED, CREATEBY, UPDATED, UPDATEBY, REMOVE) " +
@@ -32,4 +31,7 @@ public interface EmployeeMapper {
             "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove} " +
             "where username=#{username}")
     void update(Employee employee);
+
+    @Delete("delete from employee_info where ID=#{id}")
+    void delete(int id);
 }

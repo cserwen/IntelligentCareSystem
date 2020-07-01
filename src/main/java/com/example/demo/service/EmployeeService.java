@@ -41,12 +41,22 @@ public class EmployeeService {
 
         Employee temp = employeeMapper.selectByUserName(employee.getUsername());
         if (temp == null){
-            return ResultReturnUtil.fail("该员不存在");
+            return ResultReturnUtil.fail("该员工不存在");
         }
 
         employeeMapper.update(employee);
         return ResultReturnUtil.success("修改成功");
     }
+
+    public ResultReturn delete(int id){
+
+        Employee employee = employeeMapper.selectById(id);
+        if (employee == null)
+            return ResultReturnUtil.fail("该员工不存在");
+
+        employeeMapper.delete(id);
+        return ResultReturnUtil.success("删除成功");
+    };
 
 
 }
