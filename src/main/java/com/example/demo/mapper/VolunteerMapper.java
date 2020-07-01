@@ -5,6 +5,7 @@ import com.example.demo.entry.Volunteer;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
@@ -25,4 +26,11 @@ public interface VolunteerMapper {
             " #{profilePhotoDir}, #{description}, #{isActive},#{createTime}, #{createBy}, #{updateTime}," +
             " #{updateBy},#{remove})")
     void add(Volunteer volunteer);
+
+    @Update("update volunteer_info set name=#{name}, gender=#{gender}, phone=#{phone}, id_card=#{idCard}," +
+            "birthday=#{birthday}, checkin_date=#{checkInDate}, checkout_date=#{checkOutDate}, imgset_dir=#{imgSetDir}, " +
+            "profile_photo=#{profilePhotoDir}, DESCRIPTION=#{description}, ISACTIVE=#{isActive}," +
+            "CREATED=#{createTime}, CREATEBY=#{createBy}, UPDATED=#{updateTime}, UPDATEBY=#{updateBy}, REMOVE=#{remove} " +
+            "where name=#{name}")
+    void update(Volunteer volunteer);
 }

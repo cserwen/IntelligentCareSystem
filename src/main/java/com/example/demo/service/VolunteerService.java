@@ -31,4 +31,17 @@ public class VolunteerService {
         volunteerMapper.add(volunteer);
         return ResultReturnUtil.success("添加成功");
     }
+
+    public ResultReturn update(Volunteer volunteer){
+        if (volunteer.getName() == null || "".equals(volunteer.getName())){
+            return ResultReturnUtil.fail("名字不能为空");
+        }
+
+        Volunteer temp = volunteerMapper.selectByUserName(volunteer.getName());
+        if (temp == null)
+            return ResultReturnUtil.fail("该义工信息不存在");
+
+        volunteerMapper.update(volunteer);
+        return ResultReturnUtil.success("修改成功");
+    }
 }

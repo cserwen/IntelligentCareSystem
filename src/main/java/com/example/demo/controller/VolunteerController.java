@@ -25,4 +25,9 @@ public class VolunteerController {
     public ResultReturn add(@RequestBody Volunteer volunteer){
         return volunteerService.add(volunteer);
     }
+
+    @RequestMapping("/update")
+    public ResultReturn update(@RequestBody Volunteer volunteer){
+        return volunteerService.update(volunteer);
+    }
 }
