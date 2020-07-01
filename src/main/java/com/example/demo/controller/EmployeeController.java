@@ -4,6 +4,7 @@ import com.example.demo.bo.DeleteByIdBo;
 import com.example.demo.entry.Employee;
 import com.example.demo.service.EmployeeService;
 import com.example.demo.util.ResultReturn;
+import com.example.demo.util.ResultReturnUtil;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +38,11 @@ public class EmployeeController {
     @RequestMapping("/delete")
     public ResultReturn delete(@RequestBody DeleteByIdBo id){
         return employeeService.delete(id.getId());
+    }
+
+    @RequestMapping("/getAll")
+    public ResultReturn getAll(){
+        return employeeService.getAll();
     }
 
 }

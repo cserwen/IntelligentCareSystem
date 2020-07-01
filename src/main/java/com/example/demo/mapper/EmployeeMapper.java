@@ -4,6 +4,8 @@ import com.example.demo.entry.Employee;
 import com.example.demo.entry.OldPerson;
 import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
  * Created on 2020-07-01
@@ -34,4 +36,7 @@ public interface EmployeeMapper {
 
     @Delete("delete from employee_info where ID=#{id}")
     void delete(int id);
+
+    @Select("select * from employee_info")
+    List<Employee> getAll();
 }

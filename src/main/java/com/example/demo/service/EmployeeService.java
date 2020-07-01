@@ -7,6 +7,7 @@ import com.example.demo.util.ResultReturnUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
@@ -58,5 +59,9 @@ public class EmployeeService {
         return ResultReturnUtil.success("删除成功");
     };
 
+    public ResultReturn getAll(){
+        List<Employee> employees = employeeMapper.getAll();
+        return ResultReturnUtil.success("查询成功", employees);
+    }
 
 }
