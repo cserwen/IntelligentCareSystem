@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import sun.jvm.hotspot.debugger.ReadResult;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
@@ -55,5 +56,11 @@ public class VolunteerService {
         volunteerMapper.delete(id);
 
         return ResultReturnUtil.success("删除成功");
+    }
+
+    public ResultReturn getAll(){
+
+        List<Volunteer> volunteers = volunteerMapper.getAll();
+        return ResultReturnUtil.success("查询成功", volunteers);
     }
 }

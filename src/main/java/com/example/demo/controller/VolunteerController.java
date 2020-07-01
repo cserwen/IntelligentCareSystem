@@ -36,4 +36,9 @@ public class VolunteerController {
     public ResultReturn delete(@RequestBody DeleteByIdBo id){
         return volunteerService.delete(id.getId());
     }
+
+    @RequestMapping("/getAll")
+    public ResultReturn getAll(){
+        return volunteerService.getAll();
+    }
 }
