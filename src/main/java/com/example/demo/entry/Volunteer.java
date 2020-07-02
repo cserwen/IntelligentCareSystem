@@ -18,6 +18,7 @@ public class Volunteer {
     private int orgId;
     private int clientId;
     private String name;
+    private String password;
     private String gender;  //性别
     private String phone;
     private String idCard;

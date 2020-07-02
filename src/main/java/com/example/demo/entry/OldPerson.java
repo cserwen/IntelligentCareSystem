@@ -22,6 +22,7 @@ public class OldPerson {
     private int orgId;
     private int clientId;
     private String username;
+    private String password;
     private String gender;  //性别
     private String phone;
     private String idCard;

@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.bo.DeleteByIdBo;
+import com.example.demo.bo.LoginBo;
 import com.example.demo.entry.OldPerson;
 import com.example.demo.service.OldPersonService;
 import com.example.demo.util.ResultReturn;
@@ -25,6 +26,11 @@ public class OldPersonController {
 
     @Resource
     private OldPersonService oldPersonService;
+
+    @RequestMapping("/login")
+    public ResultReturn login(@RequestBody LoginBo loginBo){
+        return oldPersonService.login(loginBo);
+    }
 
     @RequestMapping("/add")
     public ResultReturn add(@RequestBody OldPerson oldPerson){

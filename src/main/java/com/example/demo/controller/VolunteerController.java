@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.bo.DeleteByIdBo;
+import com.example.demo.bo.LoginBo;
 import com.example.demo.entry.Volunteer;
 import com.example.demo.service.VolunteerService;
 import com.example.demo.util.ResultReturn;
@@ -21,6 +22,11 @@ public class VolunteerController {
 
     @Resource
     private VolunteerService volunteerService;
+
+    @RequestMapping("login")
+    public ResultReturn login(@RequestBody LoginBo loginBo){
+        return volunteerService.login(loginBo);
+    }
 
     @RequestMapping("/add")
     public ResultReturn add(@RequestBody Volunteer volunteer){

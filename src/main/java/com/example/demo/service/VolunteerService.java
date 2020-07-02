@@ -1,9 +1,12 @@
 package com.example.demo.service;
 
+import com.example.demo.bo.LoginBo;
+import com.example.demo.entry.Employee;
 import com.example.demo.entry.Volunteer;
 import com.example.demo.mapper.VolunteerMapper;
 import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
+import com.example.demo.util.TokenUtil;
 import org.springframework.stereotype.Service;
 import sun.jvm.hotspot.debugger.ReadResult;
 
@@ -20,9 +23,34 @@ public class VolunteerService {
     @Resource
     private VolunteerMapper volunteerMapper;
 
+    @Resource
+    private RedisService redisService;
+
+    public ResultReturn login(LoginBo loginBo){
+        Volunteer volunteer = volunteerMapper.selectByUserName(loginBo.getUsername());
+
+        if (volunteer == null)
+            return ResultReturnUtil.fail("no such user!");
+
+        if (volunteer.getPassword().equals(loginBo.getPassword())){
+            String token = TokenUtil.getToken();
+//            System.out.println(token + " " + loginBo.toString());
+            redisService.setString(token, loginBo.getUsername(),3600L);
+            System.out.println(redisService.get(token));
+            return ResultReturnUtil.success("volunteer login success!", token);
+
+        }
+        else
+            return ResultReturnUtil.fail("password error!");
+    }
+
     public ResultReturn add(Volunteer volunteer){
         if (volunteer.getName() == null || "".equals(volunteer.getName())){
             return ResultReturnUtil.fail("名字不能为空");
+        }
+
+        if (volunteer.getPassword() == null || "".equals(volunteer.getPassword())){
+            return ResultReturnUtil.fail("秘密不能为空");
         }
 
         Volunteer temp = volunteerMapper.selectByUserName(volunteer.getName());
