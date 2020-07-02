@@ -2,14 +2,13 @@ package com.example.demo.controller;
 
 import com.example.demo.bo.DeleteByIdBo;
 import com.example.demo.bo.LoginBo;
+import com.example.demo.bo.PicturesBo;
 import com.example.demo.entry.OldPerson;
 import com.example.demo.service.OldPersonService;
+import com.example.demo.service.PicturesService;
 import com.example.demo.util.ResultReturn;
-import com.example.demo.util.ResultReturnUtil;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
@@ -26,6 +25,9 @@ public class OldPersonController {
 
     @Resource
     private OldPersonService oldPersonService;
+
+    @Resource
+    private PicturesService picturesService;
 
     @RequestMapping("/login")
     public ResultReturn login(@RequestBody LoginBo loginBo){
@@ -50,5 +52,16 @@ public class OldPersonController {
     @RequestMapping("/getAll")
     public ResultReturn getAll(){
         return oldPersonService.getAll();
+    }
+
+    @RequestMapping("/pictures")
+    public ResultReturn submitPictures(@RequestBody MultipartFile[] pictures, @RequestHeader("token") String token){
+        PicturesBo picturesBo = new PicturesBo();
+        picturesBo.setPictures(pictures);
+        picturesBo.setToken(token);
+        picturesBo.setType("oldPerson");
+
+        System.out.println(picturesBo.toString());
+        return picturesService.savePictures(picturesBo);
     }
 }
