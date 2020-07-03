@@ -1,12 +1,17 @@
 package com.example.demo.service;
 
 import com.example.demo.bo.PicturesBo;
+import com.example.demo.mapper.PicturesMapper;
 import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+
+import java.io.File;
+import java.io.IOException;
+
 
 /**
  * @author dengzhiwen <dengzhiwen@kuaishou.com>
@@ -18,6 +23,9 @@ public class PicturesService {
     @Resource
     private RedisService redisService;
 
+    @Resource
+    private PicturesMapper picturesMapper;
+
     public ResultReturn savePictures(PicturesBo picturesBo){
         if (picturesBo.getPictures().length == 0)
             return ResultReturnUtil.fail("图片为空");
@@ -28,9 +36,7 @@ public class PicturesService {
                 return ResultReturnUtil.fail("文件类型错误");
         }
 
-        //TODO 保存文件
         save(picturesBo);
-
         return ResultReturnUtil.success("success");
     }
 
@@ -40,9 +46,22 @@ public class PicturesService {
         String token = picturesBo.getToken();
 
         String username = (String)redisService.get(token);
-        String path = "/root/pictures/" + type + "/" + username;
-        for (int i = 0; i < pictures.length; i++) {
+        String basePath = "/Users/dengzhiwen/pictures/" + type + "/" + username;
+//        String basePath = "/root/pictures/" + type + "/" + username;
+        File file = new File(basePath);
+        if (!file.exists())
+            file.mkdirs();
 
+        for (int i = 0; i < pictures.length; i++) {
+            try {
+                String filename = pictures[i].getOriginalFilename();
+                assert filename != null;
+                pictures[i].transferTo(new File(basePath + File.separator  + filename));   //保存在磁盘上
+
+                picturesMapper.savePictures(type, username, basePath + File.separator  + filename);
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 }
