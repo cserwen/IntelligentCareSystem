@@ -36,11 +36,10 @@ public class PicturesService {
                 return ResultReturnUtil.fail("文件类型错误");
         }
 
-        save(picturesBo);
-        return ResultReturnUtil.success("success");
+        return save(picturesBo);
     }
 
-    private void save(PicturesBo picturesBo){
+    private ResultReturn save(PicturesBo picturesBo){
         MultipartFile[] pictures = picturesBo.getPictures();
         String type = picturesBo.getType();
         String token = picturesBo.getToken();
@@ -54,14 +53,19 @@ public class PicturesService {
 
         for (int i = 0; i < pictures.length; i++) {
             try {
+
+
                 String filename = pictures[i].getOriginalFilename();
                 assert filename != null;
+                if (picturesMapper.getPictureByDir(basePath + File.separator  + filename)!=null)
+                    return ResultReturnUtil.success("图片已存在");
                 pictures[i].transferTo(new File(basePath + File.separator  + filename));   //保存在磁盘上
-
                 picturesMapper.savePictures(type, username, basePath + File.separator  + filename);
             }catch (IOException e){
                 e.printStackTrace();
             }
         }
+
+        return ResultReturnUtil.success("success");
     }
 }
