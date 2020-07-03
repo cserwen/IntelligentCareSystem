@@ -45,8 +45,8 @@ public class PicturesService {
         String token = picturesBo.getToken();
 
         String username = (String)redisService.get(token);
-        String basePath = "/Users/dengzhiwen/pictures/" + type + "/" + username;
-//        String basePath = "/root/pictures/" + type + "/" + username;
+//        String basePath = "/Users/dengzhiwen/pictures/" + type + "/" + username;
+        String basePath = "/root/java/pictures/" + type + "/" + username;
         File file = new File(basePath);
         if (!file.exists())
             file.mkdirs();
