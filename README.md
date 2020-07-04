@@ -6,3 +6,6 @@
 - Lombok
 - mysql
 - redis
+
+前端web代码仓库：https://github.com/yongruiwang/IntelligentCareSystem_WEB
+视觉代码仓库：https://github.com/dbylx/IntelligentCareSystem_CV.git
