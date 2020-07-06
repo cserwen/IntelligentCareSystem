@@ -8,6 +8,8 @@ import com.example.demo.service.EmployeeService;
 import com.example.demo.service.PicturesService;
 import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ import javax.annotation.Resource;
 @RequestMapping("/employee")
 public class EmployeeController {
 
+    private Logger logger = LoggerFactory.getLogger(EmployeeController.class);
+
     @Resource
     private EmployeeService employeeService;
 
@@ -35,26 +39,32 @@ public class EmployeeController {
 
     @RequestMapping("login")
     public ResultReturn login(@RequestBody LoginBo loginBo){
+
+        logger.info("员工登陆：" + loginBo);
         return employeeService.login(loginBo);
     }
 
     @RequestMapping("/add")
     public ResultReturn add(@RequestBody Employee employee){
+        logger.info("添加员工：" + employee);
         return employeeService.add(employee);
     }
 
     @RequestMapping("/update")
     public ResultReturn update(@RequestBody Employee employee){
+        logger.info("更新员工信息：" + employee);
         return employeeService.update(employee);
     }
 
     @RequestMapping("/delete")
     public ResultReturn delete(@RequestBody DeleteByIdBo id){
+        logger.info("删除员工：" + id);
         return employeeService.delete(id.getId());
     }
 
     @RequestMapping("/getAll")
     public ResultReturn getAll(){
+        logger.info("查询员工信息");
         return employeeService.getAll();
     }
 

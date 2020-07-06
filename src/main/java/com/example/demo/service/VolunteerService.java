@@ -49,7 +49,7 @@ public class VolunteerService {
         }
 
         if (volunteer.getPassword() == null || "".equals(volunteer.getPassword())){
-            return ResultReturnUtil.fail("秘密不能为空");
+            return ResultReturnUtil.fail("密码不能为空");
         }
 
         Volunteer temp = volunteerMapper.selectByUserName(volunteer.getName());

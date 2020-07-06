@@ -2,6 +2,8 @@ package com.example.demo.interceptor;
 
 import com.example.demo.service.RedisService;
 import com.example.demo.util.ResultReturnUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -23,6 +25,8 @@ import java.util.Objects;
 @Component
 public class AuthInterceptor implements HandlerInterceptor {
 
+    private Logger logger = LoggerFactory.getLogger(AuthInterceptor.class);
+
     @Resource
     private RedisService redisService;
 
@@ -36,7 +40,8 @@ public class AuthInterceptor implements HandlerInterceptor {
             return true;
 
         String token = request.getHeader("token");
-        System.out.println("token: "+ token);
+        logger.info("token: "+ token);
+
         if (StringUtils.isEmpty(token)) {
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/json; charset=utf-8");
