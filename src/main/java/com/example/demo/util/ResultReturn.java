@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.List;
+
 /**
  * @ClassName ResultReturn
  * @Description 返回结果的json数据实体类
@@ -28,5 +30,20 @@ public class ResultReturn {
         this.code = code;
         this.msg = msg;
         this.data = data;
+    }
+
+    public String toJsonString(){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("{\"code\":");
+        stringBuilder.append(code);
+        stringBuilder.append(", \"msg\":\"");
+        stringBuilder.append(msg);
+        stringBuilder.append("\", \"data\":");
+        stringBuilder.append(data);
+        stringBuilder.append("}");
+
+
+        return stringBuilder.toString();
     }
 }
