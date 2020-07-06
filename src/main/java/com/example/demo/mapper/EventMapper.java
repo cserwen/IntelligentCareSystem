@@ -1,10 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.entry.Event;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -27,4 +24,8 @@ public interface EventMapper {
 
     })
     List<Event> getAll();
+
+    @Insert("insert into event_info(event_type, event_date, event_location, event_desc, oldperson_id) " +
+            "values(#{eventType}, #{eventDate}, #{eventLocation}, #{eventDesc}, #{oldPerson})")
+    void addEvent(Event event);
 }

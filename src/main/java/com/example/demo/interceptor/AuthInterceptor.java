@@ -48,7 +48,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if( Objects.isNull(loginStatus)){
             response.setCharacterEncoding("utf-8");
             response.setContentType("text/json; charset=utf-8");
-            String jsonStr = "{\"code\":-2,\"msg\":\"token失效，请重新登陆！\"}";
+            String jsonStr = "{\"code\":-2,\"msg\":\"登陆失效，请重新登陆！\"}";
             response.getWriter().write(jsonStr);
             return false;
         }
