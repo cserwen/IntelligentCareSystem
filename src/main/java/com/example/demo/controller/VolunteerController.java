@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.bo.DeleteByIdBo;
 import com.example.demo.bo.LoginBo;
 import com.example.demo.bo.PicturesBo;
+import com.example.demo.bo.QueryUserBo;
 import com.example.demo.entry.Volunteer;
 import com.example.demo.service.PicturesService;
 import com.example.demo.service.VolunteerService;
@@ -75,5 +76,11 @@ public class VolunteerController {
 
         System.out.println(picturesBo.toString());
         return picturesService.savePictures(picturesBo);
+    }
+
+    @RequestMapping("getByUserName")
+    public ResultReturn getByUserName(@RequestBody QueryUserBo queryUserBo){
+        logger.info("查询义工：" + queryUserBo.getUsername());
+        return volunteerService.queryByUsername(queryUserBo.getUsername());
     }
 }

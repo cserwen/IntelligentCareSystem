@@ -90,4 +90,13 @@ public class VolunteerService {
         List<Volunteer> volunteers = volunteerMapper.getAll();
         return ResultReturnUtil.success("查询成功", volunteers);
     }
+
+    public ResultReturn queryByUsername(String username){
+
+        Volunteer volunteer = volunteerMapper.selectByUserName(username);
+        if (volunteer == null)
+            return ResultReturnUtil.fail("没有符合的信息");
+
+        return ResultReturnUtil.success("查询成功", volunteer);
+    }
 }

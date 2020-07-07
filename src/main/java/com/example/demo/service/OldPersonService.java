@@ -93,4 +93,13 @@ public class OldPersonService {
         else
             return ResultReturnUtil.fail("password error!");
     }
+
+    public ResultReturn queryByUsername(String username){
+
+        OldPerson oldPerson = oldPersonMapper.selectByUserName(username);
+        if (oldPerson == null)
+            return ResultReturnUtil.fail("没有符合的信息");
+
+        return ResultReturnUtil.success("查询成功", oldPerson);
+    }
 }

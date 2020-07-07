@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.bo.DeleteByIdBo;
 import com.example.demo.bo.LoginBo;
 import com.example.demo.bo.PicturesBo;
+import com.example.demo.bo.QueryUserBo;
 import com.example.demo.entry.OldPerson;
 import com.example.demo.service.OldPersonService;
 import com.example.demo.service.PicturesService;
@@ -77,5 +78,11 @@ public class OldPersonController {
 
         System.out.println(picturesBo.toString());
         return picturesService.savePictures(picturesBo);
+    }
+
+    @RequestMapping("getByUserName")
+    public ResultReturn getByUserName(@RequestBody QueryUserBo queryUserBo){
+        logger.info("查询老人：" + queryUserBo.getUsername());
+        return oldPersonService.queryByUsername(queryUserBo.getUsername());
     }
 }

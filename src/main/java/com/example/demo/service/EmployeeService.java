@@ -92,4 +92,12 @@ public class EmployeeService {
             return ResultReturnUtil.fail("password error!");
     }
 
+    public ResultReturn queryByUsername(String username){
+        Employee employee = employeeMapper.selectByUserName(username);
+        if (employee == null)
+            return ResultReturnUtil.fail("没有符合的信息");
+
+        return ResultReturnUtil.success("查询成功", employee);
+    }
+
 }
