@@ -8,6 +8,8 @@ import com.example.demo.mapper.SysUserMapper;
 import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
 import com.example.demo.util.TokenUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 
@@ -19,6 +21,8 @@ import javax.annotation.Resource;
  **/
 @Service
 public class SysUserService{
+
+    private Logger logger = LoggerFactory.getLogger(SysUserService.class);
 
     @Resource
     private SysUserMapper sysUserMapper;
@@ -35,7 +39,7 @@ public class SysUserService{
             String token = TokenUtil.getToken();
 //            System.out.println(token + " " + loginBo.toString());
             redisService.setString(token, loginBo.getUsername(),3600L);
-            System.out.println(redisService.get(token));
+            logger.info("登录：" + redisService.get(token).toString());
             return ResultReturnUtil.success("login success!", token);
 
         }
