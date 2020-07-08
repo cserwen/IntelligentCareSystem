@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entry.Event;
 import com.example.demo.mapper.EventMapper;
 import com.example.demo.socket.WebSocket;
+import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class EventController {
     private EventMapper eventMapper;
 
     @RequestMapping("add")
-    public void sendMessage(@RequestBody Event event){
+    public ResultReturn sendMessage(@RequestBody Event event){
 
         logger.info("发生事件：" + event);
 
@@ -42,5 +43,7 @@ public class EventController {
         webSocket.sendMessage(ResultReturnUtil.success("success", list));
 
         eventMapper.addEvent(event);
+
+        return ResultReturnUtil.success("添加成功");
     }
 }
