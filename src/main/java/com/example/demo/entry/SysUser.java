@@ -1,5 +1,6 @@
 package com.example.demo.entry;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -33,8 +34,11 @@ public class SysUser{
     private String mobile;
     private String description;
     private String isActive;
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date created;
     private int createBy;
+
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updated;
     private int updateBy;
     private char remove;

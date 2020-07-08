@@ -10,10 +10,15 @@ import com.example.demo.service.VolunteerService;
 import com.example.demo.util.ResultReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -26,13 +31,16 @@ import javax.annotation.Resource;
 @RequestMapping("/volunteer")
 public class VolunteerController {
 
-    private Logger logger = LoggerFactory.getLogger(VolunteerController.class);
+    private final Logger logger = LoggerFactory.getLogger(VolunteerController.class);
 
     @Resource
     private VolunteerService volunteerService;
 
     @Resource
     private PicturesService picturesService;
+
+    @Resource
+    private RestTemplate restTemplate;
 
     @RequestMapping("login")
     public ResultReturn login(@RequestBody LoginBo loginBo){
@@ -74,7 +82,14 @@ public class VolunteerController {
         picturesBo.setToken(token);
         picturesBo.setType("volunteer");
 
-        System.out.println(picturesBo.toString());
+        logger.info("接受义工图片：" + picturesBo.toString());
+        String url = "http://localhost:5000/";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+        String string = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
+        logger.info(string);
+
         return picturesService.savePictures(picturesBo);
     }
 

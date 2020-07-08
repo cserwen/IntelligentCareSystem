@@ -10,7 +10,12 @@ import com.example.demo.service.PicturesService;
 import com.example.demo.util.ResultReturn;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -33,6 +38,9 @@ public class OldPersonController {
 
     @Resource
     private PicturesService picturesService;
+
+    @Resource
+    private RestTemplate restTemplate;
 
     @RequestMapping("/login")
     public ResultReturn login(@RequestBody LoginBo loginBo){
@@ -76,7 +84,17 @@ public class OldPersonController {
         picturesBo.setToken(token);
         picturesBo.setType("oldPerson");
 
-        System.out.println(picturesBo.toString());
+        logger.info("接受图片：" + picturesBo.toString());
+
+        //Todo 向flask发送请求
+
+        String url = "http://localhost:5000/";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+        String string = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
+        logger.info(string);
+
         return picturesService.savePictures(picturesBo);
     }
 
