@@ -2,14 +2,14 @@ package com.example.demo.controller;
 
 import com.example.demo.entry.Event;
 import com.example.demo.mapper.EventMapper;
+import com.example.demo.service.EventService;
 import com.example.demo.socket.WebSocket;
 import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class EventController {
     private WebSocket webSocket;
 
     @Resource
-    private EventMapper eventMapper;
+    private EventService eventService;
 
     @RequestMapping("add")
     public ResultReturn sendMessage(@RequestBody Event event){
@@ -42,8 +42,13 @@ public class EventController {
         list.add(event);
         webSocket.sendMessage(ResultReturnUtil.success("success", list));
 
-        eventMapper.addEvent(event);
+        return eventService.addEvent(event);
+    }
 
-        return ResultReturnUtil.success("添加成功");
+    @RequestMapping("picture")
+    public ResultReturn addPicture(@RequestBody MultipartFile picture, @RequestHeader("id") String id){
+
+        logger.info("添加图片:" + picture + "==>" + id);
+        return eventService.addPicture(picture, id);
     }
 }

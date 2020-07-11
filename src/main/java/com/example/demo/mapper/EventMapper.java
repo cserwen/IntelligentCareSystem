@@ -3,6 +3,7 @@ package com.example.demo.mapper;
 import com.example.demo.entry.Event;
 import org.apache.ibatis.annotations.*;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,6 +25,10 @@ public interface EventMapper {
 
     })
     List<Event> getAll();
+
+    @Select("select id from event_info where event_date = #{date} and oldperson_id=#{oldId}")
+    String getIdByDate(Date date, int oldId);
+
 
     @Insert("insert into event_info(event_type, event_date, event_location, event_desc, oldperson_id) " +
             "values(#{eventType}, #{eventDate}, #{eventLocation}, #{eventDesc}, #{oldPerson})")

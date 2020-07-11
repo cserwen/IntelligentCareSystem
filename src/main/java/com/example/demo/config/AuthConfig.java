@@ -25,7 +25,7 @@ public class AuthConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor).addPathPatterns("/**")
                 .excludePathPatterns("/sysUser/login", "/oldPerson/login"
-                , "/employee/login", "/volunteer/login", "/event/add");
+                , "/employee/login", "/volunteer/login", "/event/add", "/event/picture");
     }
 
 
@@ -37,7 +37,7 @@ public class AuthConfig implements WebMvcConfigurer {
                 .allowedOrigins("*")
                 .allowedMethods("*")
                 .allowedHeaders("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-                        "Access-Control-Request-Headers", "token")
+                        "Access-Control-Request-Headers", "token", "id")
                 .exposedHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials")
                 .allowCredentials(true).maxAge(3600);
     }
