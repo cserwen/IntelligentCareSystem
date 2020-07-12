@@ -39,8 +39,6 @@ public class OldPersonController {
     @Resource
     private PicturesService picturesService;
 
-    @Resource
-    private RestTemplate restTemplate;
 
     @RequestMapping("/login")
     public ResultReturn login(@RequestBody LoginBo loginBo){
@@ -85,15 +83,6 @@ public class OldPersonController {
         picturesBo.setType("oldPerson");
 
         logger.info("接受图片：" + picturesBo.toString());
-
-        //Todo 向flask发送请求
-
-        String url = "http://localhost:5000/";
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-        String string = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
-        logger.info(string);
 
         return picturesService.savePictures(picturesBo);
     }

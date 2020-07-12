@@ -1,10 +1,18 @@
 package com.example.demo.service;
 
 import com.example.demo.bo.PicturesBo;
+import com.example.demo.controller.OldPersonController;
 import com.example.demo.mapper.PicturesMapper;
 import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -20,8 +28,13 @@ import java.io.IOException;
 @Service
 public class PicturesService {
 
+    private Logger logger = LoggerFactory.getLogger(PicturesService.class);
+
     @Resource
     private RedisService redisService;
+
+    @Resource
+    private RestTemplate restTemplate;
 
 //    @Resource
 //    private PicturesMapper picturesMapper;
@@ -63,6 +76,13 @@ public class PicturesService {
                 e.printStackTrace();
             }
         }
+
+        String url = "http://localhost:5000/train_face";
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
+        String string = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
+        logger.info(string);
 
         return ResultReturnUtil.success("success");
     }

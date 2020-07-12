@@ -83,12 +83,6 @@ public class VolunteerController {
         picturesBo.setType("volunteer");
 
         logger.info("接受义工图片：" + picturesBo.toString());
-        String url = "http://localhost:5000/";
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<>(httpHeaders);
-        String string = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
-        logger.info(string);
 
         return picturesService.savePictures(picturesBo);
     }

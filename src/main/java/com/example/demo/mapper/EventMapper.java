@@ -33,4 +33,7 @@ public interface EventMapper {
     @Insert("insert into event_info(event_type, event_date, event_location, event_desc, oldperson_id) " +
             "values(#{eventType}, #{eventDate}, #{eventLocation}, #{eventDesc}, #{oldPerson})")
     void addEvent(Event event);
+
+    @Select("select dir from pic_dirs where event_id = #{id}")
+    String getPathById(String id);
 }

@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -27,11 +28,10 @@ public class EventService {
     @Resource
     private PicturesMapper picturesMapper;
 
-    public ResultReturn addEvent(Event event){
+    public String addEvent(Event event){
         eventMapper.addEvent(event);
 
-        String id = eventMapper.getIdByDate(event.getEventDate(), event.getOldPerson());
-        return ResultReturnUtil.success("添加成功", id);
+        return eventMapper.getIdByDate(event.getEventDate(), event.getOldPerson());
     }
 
     public ResultReturn addPicture(MultipartFile picture, String id){
@@ -48,6 +48,8 @@ public class EventService {
 
     private ResultReturn save(MultipartFile picture, String id){
         String basePath = "/root/java/eventPics";
+
+//        String basePath = "E:\\java\\pictures";
         File file = new File(basePath);
         if (!file.exists())
             file.mkdirs();
@@ -65,6 +67,21 @@ public class EventService {
         }
 
         return ResultReturnUtil.success("图片添加成功");
+    }
+
+    public byte[] getPicture(String id){
+        String path = eventMapper.getPathById(id);
+        File file = new File(path);
+        try {
+            FileInputStream inputStream = new FileInputStream(file);
+            byte[] bytes = new byte[inputStream.available()];
+            inputStream.read(bytes, 0, inputStream.available());
+            return bytes;
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 

@@ -8,6 +8,7 @@ import com.example.demo.util.ResultReturn;
 import com.example.demo.util.ResultReturnUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,10 +40,11 @@ public class EventController {
         logger.info("发生事件：" + event);
 
         List<Event> list = new ArrayList<>();
+        String id = eventService.addEvent(event);
+        event.setId(Integer.parseInt(id));
         list.add(event);
         webSocket.sendMessage(ResultReturnUtil.success("success", list));
-
-        return eventService.addEvent(event);
+        return ResultReturnUtil.success("添加成功", id);
     }
 
     @RequestMapping("picture")
@@ -50,5 +52,13 @@ public class EventController {
 
         logger.info("添加图片:" + picture + "==>" + id);
         return eventService.addPicture(picture, id);
+    }
+
+    @RequestMapping(value = "getPicture", produces = MediaType.IMAGE_PNG_VALUE)
+    @ResponseBody
+    public byte[] getPicture(@RequestHeader("id") String id){
+
+        logger.info("查看图片，事件id：" + id);
+        return eventService.getPicture(id);
     }
 }
