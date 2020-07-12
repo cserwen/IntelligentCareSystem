@@ -84,6 +84,6 @@ public class PicturesService {
         String string = restTemplate.exchange(url, HttpMethod.GET, entity, String.class).getBody();
         logger.info(string);
 
-        return ResultReturnUtil.success("success");
+        return ResultReturnUtil.success("训练完成");
     }
 }
