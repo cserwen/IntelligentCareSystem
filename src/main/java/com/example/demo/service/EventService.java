@@ -40,8 +40,8 @@ public class EventService {
             return ResultReturnUtil.fail("图片为空");
 
         String contentType = picture.getContentType();
-        if (contentType != null && !contentType.split("/")[0].equals("image"))
-            return ResultReturnUtil.fail("文件类型错误");
+//        if (contentType != null && !contentType.split("/")[0].equals("image"))
+//            return ResultReturnUtil.fail("文件类型错误");
 
         return save(picture, id);
     }
