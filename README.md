@@ -3,7 +3,6 @@
 ## 使用的技术
 
 - mybatis
-- lombok
 - mysql
 - redis
 - Spring Boot
